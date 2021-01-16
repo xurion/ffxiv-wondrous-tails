@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Combination } from "./combinations";
 
 const Table = styled.table`
-  display: inline;
+  display: inline-block;
+  margin: 0 10px 10px 0;
 `;
 
 type CellProps = {

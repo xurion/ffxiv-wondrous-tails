@@ -39,18 +39,20 @@ function App() {
     cellStates.reduce((prev, curr) => (curr ? prev + 1 : prev), 0);
 
   const compareCombos = (w: Combination, c: Combination): boolean => {
+    let potentialCombo = true;
     const allFalse = c.indexOf(true) === -1;
     if (allFalse) {
       return true;
     } else {
       for (let i = 0; i < 16; i++) {
-        if (c[i] === true && w[i] === true) {
-          return true;
+        if (c[i] === true && w[i] === false) {
+          potentialCombo = false;
+          break;
         }
       }
     }
 
-    return false;
+    return potentialCombo;
   };
 
   const isPotentialThreeLineCombo = (combination: Combination): boolean => {
@@ -64,6 +66,17 @@ function App() {
     });
 
     return potentialThreeLineCombo;
+  };
+
+  const getPotentialCombos = (combination: Combination): Combination[] => {
+    const potentialCombos: Combination[] = [];
+    const winningCombos = getAllCombinations();
+    winningCombos.forEach((winningCombo) => {
+      if (compareCombos(winningCombo, combination)) {
+        potentialCombos.push(winningCombo);
+      }
+    });
+    return potentialCombos;
   };
 
   return (
@@ -101,7 +114,7 @@ function App() {
         Potential combination:{" "}
         {isPotentialThreeLineCombo(cellStates).toString()}
       </div>
-      {getAllCombinations().map((combo) => (
+      {getPotentialCombos(cellStates).map((combo) => (
         <WinningComboGrid combo={combo} />
       ))}
     </>
