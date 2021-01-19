@@ -28,12 +28,12 @@ function App() {
     const allFalse = c.indexOf(true) === -1;
     if (allFalse) {
       return true;
-    } else {
-      for (let i = 0; i < 16; i++) {
-        if (c[i] === true && w[i] === false) {
-          potentialCombo = false;
-          break;
-        }
+    }
+
+    for (let i = 0; i < 16; i++) {
+      if (c[i] === true && w[i] === false) {
+        potentialCombo = false;
+        break;
       }
     }
 
