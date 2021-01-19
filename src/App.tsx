@@ -1,24 +1,9 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import "bootstrap/dist/css/bootstrap.min.css";
 import getAllCombinations, { Combination } from "./combinations";
 import WinningComboGrid from "./WinningComboGrid";
-
-type CellProps = {
-  active?: boolean;
-};
-const Cell = styled.td<CellProps>`
-  ${(props) => `
-    background: ${props.active ? "#ccc" : "#fff"};
-    border: 1px solid #999;
-    cursor: pointer;
-    height: 100px;
-    width: 100px;
-
-    &:hover {
-      border-color: #333;
-    }
-  `}
-`;
+import Board from "./Board";
+import Cell from "./Cell";
 
 function App() {
   const [cellStates, setCellStates] = useState<Combination>(
@@ -55,19 +40,6 @@ function App() {
     return potentialCombo;
   };
 
-  const isPotentialThreeLineCombo = (combination: Combination): boolean => {
-    const winningCombos = getAllCombinations();
-    let potentialThreeLineCombo = false;
-    winningCombos.forEach((winningCombo) => {
-      if (compareCombos(winningCombo, combination)) {
-        potentialThreeLineCombo = true;
-        return;
-      }
-    });
-
-    return potentialThreeLineCombo;
-  };
-
   const getPotentialCombos = (combination: Combination): Combination[] => {
     const potentialCombos: Combination[] = [];
     const winningCombos = getAllCombinations();
@@ -79,43 +51,24 @@ function App() {
     return potentialCombos;
   };
 
+  const cells = [];
+  for (let i = 0; i < 16; i++) {
+    cells.push(
+      <Cell
+        active={cellStates[i]}
+        onClick={() => handleCellClick(i)}
+        img={i + 1}
+        key={i.toString()}
+      />
+    );
+  }
+
   return (
     <>
       <div>{getActiveCount()}/9</div>
-      <table>
-        <tbody>
-          <tr>
-            <Cell active={cellStates[0]} onClick={() => handleCellClick(0)} />
-            <Cell active={cellStates[1]} onClick={() => handleCellClick(1)} />
-            <Cell active={cellStates[2]} onClick={() => handleCellClick(2)} />
-            <Cell active={cellStates[3]} onClick={() => handleCellClick(3)} />
-          </tr>
-          <tr>
-            <Cell active={cellStates[4]} onClick={() => handleCellClick(4)} />
-            <Cell active={cellStates[5]} onClick={() => handleCellClick(5)} />
-            <Cell active={cellStates[6]} onClick={() => handleCellClick(6)} />
-            <Cell active={cellStates[7]} onClick={() => handleCellClick(7)} />
-          </tr>
-          <tr>
-            <Cell active={cellStates[8]} onClick={() => handleCellClick(8)} />
-            <Cell active={cellStates[9]} onClick={() => handleCellClick(9)} />
-            <Cell active={cellStates[10]} onClick={() => handleCellClick(10)} />
-            <Cell active={cellStates[11]} onClick={() => handleCellClick(11)} />
-          </tr>
-          <tr>
-            <Cell active={cellStates[12]} onClick={() => handleCellClick(12)} />
-            <Cell active={cellStates[13]} onClick={() => handleCellClick(13)} />
-            <Cell active={cellStates[14]} onClick={() => handleCellClick(14)} />
-            <Cell active={cellStates[15]} onClick={() => handleCellClick(15)} />
-          </tr>
-        </tbody>
-      </table>
-      <div>
-        Potential combination:{" "}
-        {isPotentialThreeLineCombo(cellStates).toString()}
-      </div>
-      {getPotentialCombos(cellStates).map((combo) => (
-        <WinningComboGrid combo={combo} />
+      <Board>{cells}</Board>
+      {getPotentialCombos(cellStates).map((combo, i) => (
+        <WinningComboGrid combo={combo} key={i.toString()} />
       ))}
     </>
   );

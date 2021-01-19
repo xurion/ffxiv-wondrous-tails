@@ -2,19 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import { Combination } from "./combinations";
 
-const Table = styled.table`
+const Grid = styled.div`
   display: inline-block;
+  font-size: 0;
   margin: 0 10px 10px 0;
+  width: 88px;
 `;
 
 type CellProps = {
   active?: boolean;
 };
-const Cell = styled.td<CellProps>`
+const Cell = styled.div<CellProps>`
   ${(props) => `
     background: ${props.active ? "#ccc" : "#fff"};
     border: 1px solid #999;
+    display: inline-block;
     height: 20px;
+    margin: 1px;
     width: 20px;
   `}
 `;
@@ -24,36 +28,13 @@ type WinningComboGridProps = {
 };
 const WinningComboGrid = (props: WinningComboGridProps) => {
   const { combo } = props;
+  const cells = [];
+  for (let i = 0; i < 16; i++) {
+    cells.push(<Cell active={combo[i]} key={i.toString()} />);
+  }
   return (
     <>
-      <Table>
-        <tbody>
-          <tr>
-            <Cell active={combo[0]} />
-            <Cell active={combo[1]} />
-            <Cell active={combo[2]} />
-            <Cell active={combo[3]} />
-          </tr>
-          <tr>
-            <Cell active={combo[4]} />
-            <Cell active={combo[5]} />
-            <Cell active={combo[6]} />
-            <Cell active={combo[7]} />
-          </tr>
-          <tr>
-            <Cell active={combo[8]} />
-            <Cell active={combo[9]} />
-            <Cell active={combo[10]} />
-            <Cell active={combo[11]} />
-          </tr>
-          <tr>
-            <Cell active={combo[12]} />
-            <Cell active={combo[13]} />
-            <Cell active={combo[14]} />
-            <Cell active={combo[15]} />
-          </tr>
-        </tbody>
-      </Table>
+      <Grid>{cells}</Grid>
     </>
   );
 };
