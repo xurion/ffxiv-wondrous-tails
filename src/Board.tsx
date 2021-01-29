@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 const Board = styled.div`
-  background-image: url(${process.env.PUBLIC_URL}/images/bg.png);
-  background-repeat: no-repeat;
-  width: 240px;
+  height: 240px;
+  left: 630px;
+  position: absolute;
+  top: 36px;
+  width: 248px;
 `;
 
 export default Board;

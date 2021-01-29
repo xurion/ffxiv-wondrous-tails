@@ -12,7 +12,7 @@ const CellContainer = styled.div<CellProps>`
     cursor: pointer;
     display: inline-block;
     height: 60px;
-    width: 60px;
+    width: 62px;
 
     img {
       cursor: pointer;

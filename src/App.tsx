@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import getAllCombinations, { Combination } from "./combinations";
 import WinningComboGrid from "./WinningComboGrid";
+import Book from "./Book";
 import Board from "./Board";
 import Cell from "./Cell";
 import Footer from "./Footer";
+import ActiveCount from "./ActiveCount";
 
 function App() {
   const [cellStates, setCellStates] = useState<Combination>(
@@ -66,8 +68,10 @@ function App() {
 
   return (
     <>
-      <div>{getActiveCount()}/9</div>
-      <Board>{cells}</Board>
+      <Book>
+        <ActiveCount count={getActiveCount()} />
+        <Board>{cells}</Board>
+      </Book>
       {getPotentialCombos(cellStates).map((combo, i) => (
         <WinningComboGrid combo={combo} key={i.toString()} />
       ))}
