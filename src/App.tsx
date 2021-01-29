@@ -4,6 +4,7 @@ import getAllCombinations, { Combination } from "./combinations";
 import WinningComboGrid from "./WinningComboGrid";
 import Board from "./Board";
 import Cell from "./Cell";
+import Footer from "./Footer";
 
 function App() {
   const [cellStates, setCellStates] = useState<Combination>(
@@ -70,6 +71,7 @@ function App() {
       {getPotentialCombos(cellStates).map((combo, i) => (
         <WinningComboGrid combo={combo} key={i.toString()} />
       ))}
+      <Footer />
     </>
   );
 }

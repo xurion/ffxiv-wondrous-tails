@@ -25,7 +25,7 @@ const CellContainer = styled.div<CellProps>`
 const Cell = (props: CellProps) => {
   return (
     <CellContainer {...props}>
-      <img src={`images/${props.img}.png`} alt="" />
+      <img src={`${process.env.PUBLIC_URL}/images/${props.img}.png`} alt="" />
     </CellContainer>
   );
 };
