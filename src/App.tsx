@@ -8,11 +8,16 @@ import Cell from "./Cell";
 import Footer from "./Footer";
 import ActiveCount from "./ActiveCount";
 import SecondChancePointsPanel from "./SecondChancePointsPanel";
+import { load, save } from "./storage";
 
 function App() {
-  const [cellStates, setCellStates] = useState<Combination>(
-    new Array(16).fill(false) as Combination
-  );
+  const loaded = load(new Array(16).fill(false) as Combination);
+  const [cellStates, setCellStates] = useState(loaded);
+
+  const setAndPersistCellStates = (combo: Combination) => {
+    setCellStates(combo);
+    save(combo);
+  };
 
   const handleCellClick = (cell: number) => {
     if (getActiveCount() === 9 && cellStates[cell] === false) {
@@ -21,7 +26,7 @@ function App() {
 
     const newCellsState: Combination = [...cellStates];
     newCellsState[cell] = !cellStates[cell];
-    setCellStates(newCellsState);
+    setAndPersistCellStates(newCellsState);
   };
 
   const getActiveCount = () =>
@@ -56,7 +61,7 @@ function App() {
   };
 
   const reset = () => {
-    setCellStates(new Array(16).fill(false) as Combination);
+    setAndPersistCellStates(new Array(16).fill(false) as Combination);
   };
 
   const shuffleCombination = (combo: Combination) => {
@@ -80,7 +85,7 @@ function App() {
         ...activePart,
         ...inactivePart,
       ] as Combination);
-      setCellStates(combo);
+      setAndPersistCellStates(combo);
     }, 1000);
   };
 
