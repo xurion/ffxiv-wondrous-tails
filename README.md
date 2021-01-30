@@ -10,10 +10,7 @@ This project is a work in progress. Future plans include:
 
 - Predictions percentages for 1, 2 and 3 lines
 - Randomised duty tiles
-- Save board icon placements in local storage
 - Remove icons from right side as they're assigned to match game
-- Redesign the mini potential 3-line grids
-- Style the prize blocks with outlines to match game
 - Tooltips for various parts
 - Introduction joyride
 - Replace favicon
