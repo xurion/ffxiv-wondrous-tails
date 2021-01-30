@@ -16,3 +16,4 @@ This project is a work in progress. Future plans include:
 - Style the prize blocks with outlines to match game
 - Tooltips for various parts
 - Introduction joyride
+- Replace favicon
