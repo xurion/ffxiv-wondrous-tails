@@ -59,6 +59,31 @@ function App() {
     setCellStates(new Array(16).fill(false) as Combination);
   };
 
+  const shuffleCombination = (combo: Combination) => {
+    const shuffledCombo: Combination = [...combo];
+    for (let i = shuffledCombo.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      let temp = shuffledCombo[i];
+      shuffledCombo[i] = shuffledCombo[j];
+      shuffledCombo[j] = temp;
+    }
+    return shuffledCombo;
+  };
+
+  const reshuffle = () => {
+    const active = getActiveCount();
+    reset();
+    setTimeout(() => {
+      const activePart = new Array(active).fill(true);
+      const inactivePart = new Array(16 - active).fill(false);
+      const combo = shuffleCombination([
+        ...activePart,
+        ...inactivePart,
+      ] as Combination);
+      setCellStates(combo);
+    }, 1000);
+  };
+
   const cells = [];
   for (let i = 0; i < 16; i++) {
     cells.push(
@@ -76,7 +101,7 @@ function App() {
       <Book>
         <ActiveCount count={getActiveCount()} />
         <Board>{cells}</Board>
-        <SecondChancePointsPanel onReset={reset} />
+        <SecondChancePointsPanel onReset={reset} onReshuffle={reshuffle} />
       </Book>
       {getPotentialCombos(cellStates).map((combo, i) => (
         <WinningComboGrid combo={combo} key={i.toString()} />

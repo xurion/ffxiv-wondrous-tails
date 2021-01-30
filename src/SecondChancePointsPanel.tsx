@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  left: 125px;
+  left: 132px;
   position: absolute;
   top: 457px;
 `;
@@ -18,13 +18,29 @@ const Button = styled.button`
   }
 `;
 
+const Separator = styled.span`
+  border-left: 1px solid #000;
+  border-right: 1px solid #fff;
+  display: inline-block;
+  height: 16px;
+  margin: 0 15px;
+  position: relative;
+  top: 2px;
+`;
+
 type SecondChancePointsPanelProps = {
   onReset: () => void;
+  onReshuffle: () => void;
 };
-const SecondChancePointsPanel = ({ onReset }: SecondChancePointsPanelProps) => {
+const SecondChancePointsPanel = ({
+  onReset,
+  onReshuffle,
+}: SecondChancePointsPanelProps) => {
   return (
     <Wrapper>
       <Button onClick={onReset}>Reset</Button>
+      <Separator />
+      <Button onClick={onReshuffle}>Reshuffle</Button>
     </Wrapper>
   );
 };
