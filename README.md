@@ -13,4 +13,4 @@ This project is a work in progress. Future plans include:
 - Remove icons from right side as they're assigned to match game
 - Tooltips for various parts
 - Introduction joyride
-- Replace favicon
+
