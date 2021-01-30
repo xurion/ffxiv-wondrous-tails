@@ -3,10 +3,13 @@ import styled from "styled-components";
 import { Combination } from "./combinations";
 
 const Grid = styled.div`
+  background: #e3d69c;
+  border: 1px solid #969074;
   display: inline-block;
   font-size: 0;
-  margin: 0 10px 10px 0;
-  width: 88px;
+  margin: 0 12px 12px 0;
+  padding: 3px;
+  width: 72px;
 `;
 
 type CellProps = {
@@ -14,19 +17,20 @@ type CellProps = {
 };
 const Cell = styled.div<CellProps>`
   ${(props) => `
-    background: ${props.active ? "#ccc" : "#fff"};
-    border: 1px solid #999;
+    background: ${props.active ? "#fff" : "transparent"};
+    border: 2px solid ${props.active ? "#fff" : "rgba(255,255,255,0.4)"};
+    border-radius: 50%;
     display: inline-block;
-    height: 20px;
+    height: 14px;
     margin: 1px;
-    width: 20px;
+    width: 14px;
   `}
 `;
 
-type WinningComboGridProps = {
+type ComboGridProps = {
   combo: Combination;
 };
-const WinningComboGrid = (props: WinningComboGridProps) => {
+const ComboGrid = (props: ComboGridProps) => {
   const { combo } = props;
   const cells = [];
   for (let i = 0; i < 16; i++) {
@@ -39,4 +43,4 @@ const WinningComboGrid = (props: WinningComboGridProps) => {
   );
 };
 
-export default WinningComboGrid;
+export default ComboGrid;
