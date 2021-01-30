@@ -1,8 +1,13 @@
-import React from "react";
+import styled from "styled-components";
+
+const StyledP = styled.p`
+  font-size: 12px;
+  text-align: center;
+`;
 
 const Footer = () => {
   return (
-    <p>
+    <StyledP>
       Created by{" "}
       <a
         href="https://eu.finalfantasyxiv.com/lodestone/character/2387352"
@@ -24,7 +29,7 @@ const Footer = () => {
       <br />
       &copy; 2010 - {new Date().getFullYear()} SQUARE ENIX CO., LTD. All Rights
       Reserved.
-    </p>
+    </StyledP>
   );
 };
 
