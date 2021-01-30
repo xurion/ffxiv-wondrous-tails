@@ -7,6 +7,7 @@ import Board from "./Board";
 import Cell from "./Cell";
 import Footer from "./Footer";
 import ActiveCount from "./ActiveCount";
+import SecondChancePointsPanel from "./SecondChancePointsPanel";
 
 function App() {
   const [cellStates, setCellStates] = useState<Combination>(
@@ -54,6 +55,10 @@ function App() {
     return potentialCombos;
   };
 
+  const reset = () => {
+    setCellStates(new Array(16).fill(false) as Combination);
+  };
+
   const cells = [];
   for (let i = 0; i < 16; i++) {
     cells.push(
@@ -71,6 +76,7 @@ function App() {
       <Book>
         <ActiveCount count={getActiveCount()} />
         <Board>{cells}</Board>
+        <SecondChancePointsPanel onReset={reset} />
       </Book>
       {getPotentialCombos(cellStates).map((combo, i) => (
         <WinningComboGrid combo={combo} key={i.toString()} />
