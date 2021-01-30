@@ -8,11 +8,13 @@ import Cell from "./Cell";
 import Footer from "./Footer";
 import ActiveCount from "./ActiveCount";
 import SecondChancePointsPanel from "./SecondChancePointsPanel";
+import LoadingIcon from "./LoadingIcon";
 import { load, save } from "./storage";
 
 function App() {
-  const loaded = load(new Array(16).fill(false) as Combination);
-  const [cellStates, setCellStates] = useState(loaded);
+  const loadedData = load(new Array(16).fill(false) as Combination);
+  const [cellStates, setCellStates] = useState(loadedData);
+  const [reshuffling, setReshuffling] = useState(false);
 
   const setAndPersistCellStates = (combo: Combination) => {
     setCellStates(combo);
@@ -76,6 +78,7 @@ function App() {
   };
 
   const reshuffle = () => {
+    setReshuffling(true);
     const active = getActiveCount();
     reset();
     setTimeout(() => {
@@ -86,6 +89,7 @@ function App() {
         ...inactivePart,
       ] as Combination);
       setAndPersistCellStates(combo);
+      setReshuffling(false);
     }, 1000);
   };
 
@@ -107,7 +111,11 @@ function App() {
         <ActiveCount count={getActiveCount()} />
         <Board>{cells}</Board>
         <SecondChancePointsPanel onReset={reset} onReshuffle={reshuffle} />
-        <ThreeLineCombos combos={getPotentialCombos(cellStates)} />
+        {reshuffling ? (
+          <LoadingIcon />
+        ) : (
+          <ThreeLineCombos combos={getPotentialCombos(cellStates)} />
+        )}
       </Book>
       <Footer />
     </>
