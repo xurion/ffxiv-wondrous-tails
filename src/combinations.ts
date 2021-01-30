@@ -28,7 +28,7 @@ const getAllCombinations = (): Combination[] => [
     true,false,false,true,false,true,false,true,true,true,true,true,false,false,false,true
   ],
   [ //I
-    false,false,true,true,false,false,true,false,false,true,true,false,true,true,true,true
+    true,false,false,true,true,false,true,false,true,true,true,true,true,false,false,false
   ],
   [ //J
     false,false,true,true,false,false,true,false,false,true,true,false,true,true,true,true
