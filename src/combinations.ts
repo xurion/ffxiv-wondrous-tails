@@ -27,9 +27,6 @@ const getAllCombinations = (): Combination[] => [
   [ //I
     true,false,false,true,true,false,true,false,true,true,true,true,true,false,false,false
   ],
-  [ //T
-    true,false,false,false,true,true,true,true,true,false,true,false,true,false,false,true
-  ],
   [ //U
     true,true,true,true,false,false,true,false,false,true,true,false,true,false,true,false
   ],
@@ -38,6 +35,9 @@ const getAllCombinations = (): Combination[] => [
   ],
   [ //C
     false,true,false,true,false,true,true,false,false,true,false,false,true,true,true,true
+  ],
+  [ //T
+    true,false,false,false,true,true,true,true,true,false,true,false,true,false,false,true
   ],
   [ //D
     true,true,true,true,false,true,true,false,false,false,true,false,false,false,true,true
@@ -51,9 +51,6 @@ const getAllCombinations = (): Combination[] => [
   [ //P
     true,false,false,true,true,true,true,true,true,true,false,false,true,false,false,false
   ],
-  [ //E
-    true,false,false,false,true,true,false,false,true,true,true,true,true,false,false,true
-  ],
   [ //V
     true,true,true,true,false,true,true,false,false,true,false,false,true,true,false,false
   ],
@@ -63,10 +60,13 @@ const getAllCombinations = (): Combination[] => [
   [ //J
     false,false,true,true,false,false,true,false,false,true,true,false,true,true,true,true
   ],
+  [ //E
+    true,false,false,false,true,true,false,false,true,true,true,true,true,false,false,true
+  ],
   [ //F
     true,false,true,false,true,true,true,true,false,false,true,false,false,false,true,true
   ],
-  [ //x
+  [ //X
     false,false,true,true,false,false,true,false,true,true,true,true,true,false,true,false
   ],
   [ //L

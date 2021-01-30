@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import getAllCombinations, { Combination } from "./combinations";
-import WinningComboGrid from "./WinningComboGrid";
+import ThreeLineCombos from "./ThreeLineCombos";
 import Book from "./Book";
 import Board from "./Board";
 import Cell from "./Cell";
@@ -102,10 +102,8 @@ function App() {
         <ActiveCount count={getActiveCount()} />
         <Board>{cells}</Board>
         <SecondChancePointsPanel onReset={reset} onReshuffle={reshuffle} />
+        <ThreeLineCombos combos={getPotentialCombos(cellStates)} />
       </Book>
-      {getPotentialCombos(cellStates).map((combo, i) => (
-        <WinningComboGrid combo={combo} key={i.toString()} />
-      ))}
       <Footer />
     </>
   );
