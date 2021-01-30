@@ -9,7 +9,6 @@ Automatically built and deployed: https://xurion.github.io/ffxiv-wondrous-tails
 This project is a work in progress. Future plans include:
 
 - Predictions percentages for 1, 2 and 3 lines
-- Reshuffle function to match game
 - Randomised duty tiles
 - Save board icon placements in local storage
 - Remove icons from right side as they're assigned to match game
