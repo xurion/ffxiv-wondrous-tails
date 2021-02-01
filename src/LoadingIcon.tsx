@@ -1,3 +1,4 @@
+import React from "react";
 import CircleLoader from "react-spinners/CircleLoader";
 import styled from "styled-components";
 
