@@ -10,6 +10,9 @@ import ActiveCount from "./ActiveCount";
 import SecondChancePointsPanel from "./SecondChancePointsPanel";
 import LoadingIcon from "./LoadingIcon";
 import { load, save } from "./storage";
+import { TrackEvent, TrackPageView } from "./analytics";
+
+TrackPageView();
 
 function App() {
   const loadedData = load(new Array(16).fill(false) as Combination);
@@ -66,6 +69,15 @@ function App() {
     setAndPersistCellStates(new Array(16).fill(false) as Combination);
   };
 
+  const handleResetClick = () => {
+    TrackEvent({
+      category: "board",
+      action: "reset",
+      value: getActiveCount(),
+    });
+    reset();
+  };
+
   const shuffleCombination = (combo: Combination) => {
     const shuffledCombo: Combination = [...combo];
     for (let i = shuffledCombo.length - 1; i > 0; i--) {
@@ -110,7 +122,10 @@ function App() {
       <Book>
         <ActiveCount count={getActiveCount()} />
         <Board>{cells}</Board>
-        <SecondChancePointsPanel onReset={reset} onReshuffle={reshuffle} />
+        <SecondChancePointsPanel
+          onReset={handleResetClick}
+          onReshuffle={reshuffle}
+        />
         {reshuffling ? (
           <LoadingIcon />
         ) : (
