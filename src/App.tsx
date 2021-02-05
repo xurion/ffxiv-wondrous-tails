@@ -68,9 +68,9 @@ function App() {
   };
 
   const handleResetClick = () => {
+    debugger;
     TrackEvent({
-      category: "board",
-      action: "reset",
+      eventName: "reset_board",
       value: getActiveCount(),
     });
     reset();

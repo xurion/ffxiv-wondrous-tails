@@ -1,16 +1,20 @@
+const globalGa =
+  process.env.NODE_ENV === "development" ? console.log : window.gtag;
+
 type TrackEventProps = {
-  category: string;
-  action: string;
+  eventName: string;
+  category?: string;
+  action?: string;
   label?: string;
   value?: number;
 };
 
 export const TrackEvent = ({
+  eventName,
   category,
   action,
   label,
   value,
 }: TrackEventProps) => {
-  // @ts-ignore
-  // window.dataLayer.push({event: `${category} })
+  globalGa(eventName, { category, action, label, value });
 };
