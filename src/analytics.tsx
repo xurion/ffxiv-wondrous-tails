@@ -1,11 +1,3 @@
-import ReactGA from "react-ga";
-
-ReactGA.initialize("G-RQH1TGKGLD", { debug: true });
-
-export const TrackPageView = () => {
-  ReactGA.pageview(window.location.pathname + window.location.search);
-};
-
 type TrackEventProps = {
   category: string;
   action: string;
@@ -19,10 +11,6 @@ export const TrackEvent = ({
   label,
   value,
 }: TrackEventProps) => {
-  ReactGA.event({
-    category,
-    action,
-    label,
-    value,
-  });
+  // @ts-ignore
+  // window.dataLayer.push({event: `${category} })
 };

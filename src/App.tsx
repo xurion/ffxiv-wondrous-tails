@@ -10,9 +10,7 @@ import ActiveCount from "./ActiveCount";
 import SecondChancePointsPanel from "./SecondChancePointsPanel";
 import LoadingIcon from "./LoadingIcon";
 import { load, save } from "./storage";
-import { TrackEvent, TrackPageView } from "./analytics";
-
-TrackPageView();
+import { TrackEvent } from "./analytics";
 
 function App() {
   const loadedData = load(new Array(16).fill(false) as Combination);
