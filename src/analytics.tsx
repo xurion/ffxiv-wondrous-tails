@@ -16,5 +16,5 @@ export const TrackEvent = ({
   label,
   value,
 }: TrackEventProps) => {
-  globalGa(eventName, { category, action, label, value });
+  globalGa("event", eventName, { category, action, label, value });
 };
