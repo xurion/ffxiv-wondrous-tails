@@ -4,7 +4,7 @@ name: Continuous deployment to Github pages
 # events but only for the master branch
 on:
   push:
-    branches: [main, ga]
+    branches: [main]
 
 jobs:
   # This workflow contains a single job called "build"
