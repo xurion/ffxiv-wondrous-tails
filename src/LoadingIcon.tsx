@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 
 const LoadingIcon = () => (
   <Wrapper>
-    <CircleLoader color="#66b19f" size="100" />
+    <CircleLoader color="#66b19f" size="100px" />
   </Wrapper>
 );
 

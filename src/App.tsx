@@ -29,6 +29,10 @@ function App() {
 
     const newCellsState: Combination = [...cellStates];
     newCellsState[cell] = !cellStates[cell];
+    TrackEvent({
+      eventName: newCellsState[cell] ? "activate_seal" : "deactivate_seal",
+      value: cell + 1,
+    });
     setAndPersistCellStates(newCellsState);
   };
 
@@ -90,6 +94,10 @@ function App() {
   const reshuffle = () => {
     setReshuffling(true);
     const active = getActiveCount();
+    TrackEvent({
+      eventName: "reshuffle_board",
+      value: active,
+    });
     reset();
     setTimeout(() => {
       const activePart = new Array(active).fill(true);
