@@ -10,6 +10,7 @@ import ActiveCount from "./ActiveCount";
 import SecondChancePointsPanel from "./SecondChancePointsPanel";
 import LoadingIcon from "./LoadingIcon";
 import { load, save } from "./storage";
+import { TrackEvent } from "./analytics";
 
 function App() {
   const loadedData = load(new Array(16).fill(false) as Combination);
@@ -28,6 +29,10 @@ function App() {
 
     const newCellsState: Combination = [...cellStates];
     newCellsState[cell] = !cellStates[cell];
+    TrackEvent({
+      eventName: newCellsState[cell] ? "activate_seal" : "deactivate_seal",
+      value: cell + 1,
+    });
     setAndPersistCellStates(newCellsState);
   };
 
@@ -66,6 +71,15 @@ function App() {
     setAndPersistCellStates(new Array(16).fill(false) as Combination);
   };
 
+  const handleResetClick = () => {
+    debugger;
+    TrackEvent({
+      eventName: "reset_board",
+      value: getActiveCount(),
+    });
+    reset();
+  };
+
   const shuffleCombination = (combo: Combination) => {
     const shuffledCombo: Combination = [...combo];
     for (let i = shuffledCombo.length - 1; i > 0; i--) {
@@ -80,6 +94,10 @@ function App() {
   const reshuffle = () => {
     setReshuffling(true);
     const active = getActiveCount();
+    TrackEvent({
+      eventName: "reshuffle_board",
+      value: active,
+    });
     reset();
     setTimeout(() => {
       const activePart = new Array(active).fill(true);
@@ -110,7 +128,10 @@ function App() {
       <Book>
         <ActiveCount count={getActiveCount()} />
         <Board>{cells}</Board>
-        <SecondChancePointsPanel onReset={reset} onReshuffle={reshuffle} />
+        <SecondChancePointsPanel
+          onReset={handleResetClick}
+          onReshuffle={reshuffle}
+        />
         {reshuffling ? (
           <LoadingIcon />
         ) : (

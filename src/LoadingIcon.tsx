@@ -1,3 +1,4 @@
+import React from "react";
 import CircleLoader from "react-spinners/CircleLoader";
 import styled from "styled-components";
 
@@ -9,7 +10,7 @@ const Wrapper = styled.div`
 
 const LoadingIcon = () => (
   <Wrapper>
-    <CircleLoader color="#66b19f" size="100" />
+    <CircleLoader color="#66b19f" size="100px" />
   </Wrapper>
 );
 
