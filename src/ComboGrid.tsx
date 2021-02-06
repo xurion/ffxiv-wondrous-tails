@@ -13,34 +13,50 @@ const Grid = styled.div`
 `;
 
 type CellProps = {
-  active?: boolean;
+  active: boolean;
+  required: boolean;
 };
 const Cell = styled.div<CellProps>`
-  ${(props) => `
-    background: ${props.active ? "#fff" : "transparent"};
-    border: 2px solid ${props.active ? "#fff" : "rgba(255,255,255,0.4)"};
-    border-radius: 50%;
-    display: inline-block;
-    height: 14px;
-    margin: 1px;
-    width: 14px;
-  `}
+  ${(props) => {
+    if (props.active && props.required) {
+      return `
+        background: #fff;
+      `;
+    }
+    if (props.required) {
+      return `
+        background: #9a8c6b;
+      `;
+    }
+    return `
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.4);
+    `;
+  }}
+  border-radius: 50%;
+  display: inline-block;
+  height: 14px;
+  margin: 1px;
+  width: 14px;
 `;
 
 type ComboGridProps = {
-  combo: Combination;
+  fullCombo: Combination;
+  activeCombo: Combination;
 };
 const ComboGrid = (props: ComboGridProps) => {
-  const { combo } = props;
+  const { fullCombo, activeCombo } = props;
   const cells = [];
   for (let i = 0; i < 16; i++) {
-    cells.push(<Cell active={combo[i]} key={i.toString()} />);
+    cells.push(
+      <Cell
+        active={activeCombo[i]}
+        required={fullCombo[i]}
+        key={i.toString()}
+      />
+    );
   }
-  return (
-    <>
-      <Grid>{cells}</Grid>
-    </>
-  );
+  return <Grid>{cells}</Grid>;
 };
 
 export default ComboGrid;
