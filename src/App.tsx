@@ -11,6 +11,7 @@ import SecondChancePointsPanel from "./SecondChancePointsPanel";
 import LoadingIcon from "./LoadingIcon";
 import { load, save } from "./storage";
 import { TrackEvent } from "./analytics";
+import Help, { HelpA, HelpP } from "./Help";
 
 function App() {
   const loadedData = load(new Array(16).fill(false) as Combination);
@@ -132,6 +133,22 @@ function App() {
           onReset={handleResetClick}
           onReshuffle={reshuffle}
         />
+        <Help>
+          <>
+            <HelpP>
+              Welcome to the FFXIV Wondrous Tails helper! Activate seals on the
+              top right to get started.
+            </HelpP>
+            <HelpP>
+              Line chance calculation coming soon. Feedback and suggestions
+              welcome over on the{" "}
+              <HelpA href="https://github.com/xurion/ffxiv-wondrous-tails/issues">
+                issue tracker
+              </HelpA>
+              .
+            </HelpP>
+          </>
+        </Help>
         {reshuffling ? (
           <LoadingIcon />
         ) : (
