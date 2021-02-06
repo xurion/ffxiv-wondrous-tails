@@ -21,12 +21,17 @@ const PlusMore = styled.span`
 
 type ThreeLineCombosProps = {
   combos: Combination[];
+  activeCombo: Combination;
 };
-const ThreeLineCombos = ({ combos }: ThreeLineCombosProps) => {
+const ThreeLineCombos = ({ combos, activeCombo }: ThreeLineCombosProps) => {
   return (
     <Wrapper>
       {combos.slice(0, 20).map((combo, i) => (
-        <ComboGrid combo={combo} key={i.toString()} />
+        <ComboGrid
+          fullCombo={combo}
+          activeCombo={activeCombo}
+          key={i.toString()}
+        />
       ))}
       {combos.length > 20 && (
         <PlusMore>+ {combos.length - 20} more...</PlusMore>

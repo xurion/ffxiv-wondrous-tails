@@ -73,7 +73,6 @@ function App() {
   };
 
   const handleResetClick = () => {
-    debugger;
     TrackEvent({
       eventName: "reset_board",
       value: getActiveCount(),
@@ -152,7 +151,10 @@ function App() {
         {reshuffling ? (
           <LoadingIcon />
         ) : (
-          <ThreeLineCombos combos={getPotentialCombos(cellStates)} />
+          <ThreeLineCombos
+            combos={getPotentialCombos(cellStates)}
+            activeCombo={cellStates}
+          />
         )}
       </Book>
       <Footer />
