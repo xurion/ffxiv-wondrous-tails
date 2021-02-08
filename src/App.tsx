@@ -143,7 +143,16 @@ function App() {
             <HelpP>
               Line chance calculation coming soon. Feedback and suggestions
               welcome over on the{" "}
-              <HelpA href="https://github.com/xurion/ffxiv-wondrous-tails/issues">
+              <HelpA
+                href="https://github.com/xurion/ffxiv-wondrous-tails/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  TrackEvent({
+                    eventName: "issue_tracker",
+                  })
+                }
+              >
                 issue tracker
               </HelpA>
               .
