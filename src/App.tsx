@@ -12,6 +12,7 @@ import LoadingIcon from "./LoadingIcon";
 import { load, save } from "./storage";
 import { TrackEvent } from "./analytics";
 import Help, { HelpA, HelpP } from "./Help";
+import RemainingSeals from "./RemainingSeals";
 
 function App() {
   const loadedData = load(new Array(16).fill(false) as Combination);
@@ -115,7 +116,7 @@ function App() {
   for (let i = 0; i < 16; i++) {
     cells.push(
       <Cell
-        active={cellStates[i]}
+        visible={cellStates[i]}
         onClick={() => handleCellClick(i)}
         img={i + 1}
         key={i.toString()}
@@ -128,6 +129,7 @@ function App() {
       <Book>
         <ActiveCount count={getActiveCount()} />
         <Board>{cells}</Board>
+        <RemainingSeals activeCombo={cellStates} />
         <SecondChancePointsPanel
           onReset={handleResetClick}
           onReshuffle={reshuffle}
@@ -141,7 +143,16 @@ function App() {
             <HelpP>
               Line chance calculation coming soon. Feedback and suggestions
               welcome over on the{" "}
-              <HelpA href="https://github.com/xurion/ffxiv-wondrous-tails/issues">
+              <HelpA
+                href="https://github.com/xurion/ffxiv-wondrous-tails/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  TrackEvent({
+                    eventName: "issue_tracker",
+                  })
+                }
+              >
                 issue tracker
               </HelpA>
               .

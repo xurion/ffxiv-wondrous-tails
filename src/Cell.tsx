@@ -2,30 +2,37 @@ import React from "react";
 import styled from "styled-components";
 
 type CellProps = {
-  active?: boolean;
+  visible?: boolean;
   img: number;
-  onClick: () => void;
+  onClick?: () => void;
+  size?: number;
 };
 
 const CellContainer = styled.div<CellProps>`
   ${(props) => `
-    cursor: pointer;
+    cursor: ${props.onClick ? "pointer" : "default"};
     display: inline-block;
-    height: 60px;
-    width: 62px;
+    height: ${props.size || 60}px;
+    width: ${props.size || 62}px;
 
     img {
-      cursor: pointer;
-      opacity: ${props.active ? 1 : 0};
+      cursor: ${props.onClick ? "pointer" : "default"};
+      opacity: ${props.visible ? 1 : 0};
       transition: .5s;
     }
   `}
 `;
 
 const Cell = (props: CellProps) => {
+  const { img, size = 60 } = props;
   return (
     <CellContainer {...props}>
-      <img src={`${process.env.PUBLIC_URL}/images/${props.img}.png`} alt="" />
+      <img
+        src={`${process.env.PUBLIC_URL}/images/${img}.png`}
+        alt=""
+        width={size}
+        height={size}
+      />
     </CellContainer>
   );
 };
