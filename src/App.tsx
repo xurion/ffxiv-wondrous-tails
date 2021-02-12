@@ -13,6 +13,7 @@ import { load, save } from "./storage";
 import { TrackEvent } from "./analytics";
 import Help, { HelpA, HelpP } from "./Help";
 import RemainingSeals from "./RemainingSeals";
+import NextReset from "./NextReset";
 
 function App() {
   const loadedData = load(new Array(16).fill(false) as Combination);
@@ -127,6 +128,7 @@ function App() {
   return (
     <>
       <Book>
+        <NextReset />
         <ActiveCount count={getActiveCount()} />
         <Board>{cells}</Board>
         <RemainingSeals activeCombo={cellStates} />

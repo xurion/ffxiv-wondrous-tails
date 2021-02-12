@@ -26,7 +26,7 @@ const Footer = () => {
         Github
       </a>
       <br />
-      This website is not affiliated to Square Enix.
+      This website is not affiliated with Square Enix.
       <br />
       &copy; 2010 - {new Date().getFullYear()} SQUARE ENIX CO., LTD. All Rights
       Reserved.
