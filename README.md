@@ -1,5 +1,16 @@
 # FFXIV Wondrous Tails Helper
 
-A simple UI to show a grid of 3-line combinations for Wondrous Tails.
+A themed UI to help with 3-line combinations and predictions on Wondrous Tails in Final Fantasy XIV.
 
 Automatically built and deployed: https://xurion.github.io/ffxiv-wondrous-tails
+
+## Development
+
+This project is a work in progress. Future plans include:
+
+- Google Analytics
+- Predictions percentages for 1, 2 and 3 lines
+- Randomised duty tiles
+- Remove icons from right side as they're assigned to match game
+- Tooltips for various parts
+- Introduction joyride

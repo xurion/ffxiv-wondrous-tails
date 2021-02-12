@@ -1,71 +1,62 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import "bootstrap/dist/css/bootstrap.min.css";
 import getAllCombinations, { Combination } from "./combinations";
-import WinningComboGrid from "./WinningComboGrid";
-
-type CellProps = {
-  active?: boolean;
-};
-const Cell = styled.td<CellProps>`
-  ${(props) => `
-    background: ${props.active ? "#ccc" : "#fff"};
-    border: 1px solid #999;
-    cursor: pointer;
-    height: 100px;
-    width: 100px;
-
-    &:hover {
-      border-color: #333;
-    }
-  `}
-`;
+import ThreeLineCombos from "./ThreeLineCombos";
+import Book from "./Book";
+import Board from "./Board";
+import Seal from "./Seal";
+import Footer from "./Footer";
+import ActiveCount from "./ActiveCount";
+import SecondChancePointsPanel from "./SecondChancePointsPanel";
+import LoadingIcon from "./LoadingIcon";
+import { load, save } from "./storage";
+import { TrackEvent } from "./analytics";
+import Help, { HelpA, HelpP } from "./Help";
+import RemainingSeals from "./RemainingSeals";
+import NextReset from "./NextReset";
 
 function App() {
-  const [cellStates, setCellStates] = useState<Combination>(
-    new Array(16).fill(false) as Combination
-  );
+  const loadedData = load(new Array(16).fill(false) as Combination);
+  const [sealStates, setSealStates] = useState(loadedData);
+  const [reshuffling, setReshuffling] = useState(false);
+
+  const setAndPersistSealStates = (combo: Combination) => {
+    setSealStates(combo);
+    save(combo);
+  };
 
   const handleCellClick = (cell: number) => {
-    if (getActiveCount() === 9 && cellStates[cell] === false) {
+    if (getActiveCount() === 9 && sealStates[cell] === false) {
       return;
     }
 
-    const newCellsState: Combination = [...cellStates];
-    newCellsState[cell] = !cellStates[cell];
-    setCellStates(newCellsState);
+    const newSealState: Combination = [...sealStates];
+    newSealState[cell] = !sealStates[cell];
+    TrackEvent({
+      eventName: newSealState[cell] ? "activate_seal" : "deactivate_seal",
+      value: cell + 1,
+    });
+    setAndPersistSealStates(newSealState);
   };
 
   const getActiveCount = () =>
-    cellStates.reduce((prev, curr) => (curr ? prev + 1 : prev), 0);
+    sealStates.reduce((prev, curr) => (curr ? prev + 1 : prev), 0);
 
   const compareCombos = (w: Combination, c: Combination): boolean => {
     let potentialCombo = true;
     const allFalse = c.indexOf(true) === -1;
     if (allFalse) {
       return true;
-    } else {
-      for (let i = 0; i < 16; i++) {
-        if (c[i] === true && w[i] === false) {
-          potentialCombo = false;
-          break;
-        }
+    }
+
+    for (let i = 0; i < 16; i++) {
+      if (c[i] === true && w[i] === false) {
+        potentialCombo = false;
+        break;
       }
     }
 
     return potentialCombo;
-  };
-
-  const isPotentialThreeLineCombo = (combination: Combination): boolean => {
-    const winningCombos = getAllCombinations();
-    let potentialThreeLineCombo = false;
-    winningCombos.forEach((winningCombo) => {
-      if (compareCombos(winningCombo, combination)) {
-        potentialThreeLineCombo = true;
-        return;
-      }
-    });
-
-    return potentialThreeLineCombo;
   };
 
   const getPotentialCombos = (combination: Combination): Combination[] => {
@@ -79,44 +70,107 @@ function App() {
     return potentialCombos;
   };
 
+  const reset = () => {
+    setAndPersistSealStates(new Array(16).fill(false) as Combination);
+  };
+
+  const handleResetClick = () => {
+    TrackEvent({
+      eventName: "reset_board",
+      value: getActiveCount(),
+    });
+    reset();
+  };
+
+  const shuffleCombination = (combo: Combination) => {
+    const shuffledCombo: Combination = [...combo];
+    for (let i = shuffledCombo.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      let temp = shuffledCombo[i];
+      shuffledCombo[i] = shuffledCombo[j];
+      shuffledCombo[j] = temp;
+    }
+    return shuffledCombo;
+  };
+
+  const reshuffle = () => {
+    setReshuffling(true);
+    const active = getActiveCount();
+    TrackEvent({
+      eventName: "reshuffle_board",
+      value: active,
+    });
+    reset();
+    setTimeout(() => {
+      const activePart = new Array(active).fill(true);
+      const inactivePart = new Array(16 - active).fill(false);
+      const combo = shuffleCombination([
+        ...activePart,
+        ...inactivePart,
+      ] as Combination);
+      setAndPersistSealStates(combo);
+      setReshuffling(false);
+    }, 1000);
+  };
+
+  const cells = [];
+  for (let i = 0; i < 16; i++) {
+    cells.push(
+      <Seal
+        visible={sealStates[i]}
+        onClick={() => handleCellClick(i)}
+        img={i + 1}
+        key={i.toString()}
+      />
+    );
+  }
+
   return (
     <>
-      <div>{getActiveCount()}/9</div>
-      <table>
-        <tbody>
-          <tr>
-            <Cell active={cellStates[0]} onClick={() => handleCellClick(0)} />
-            <Cell active={cellStates[1]} onClick={() => handleCellClick(1)} />
-            <Cell active={cellStates[2]} onClick={() => handleCellClick(2)} />
-            <Cell active={cellStates[3]} onClick={() => handleCellClick(3)} />
-          </tr>
-          <tr>
-            <Cell active={cellStates[4]} onClick={() => handleCellClick(4)} />
-            <Cell active={cellStates[5]} onClick={() => handleCellClick(5)} />
-            <Cell active={cellStates[6]} onClick={() => handleCellClick(6)} />
-            <Cell active={cellStates[7]} onClick={() => handleCellClick(7)} />
-          </tr>
-          <tr>
-            <Cell active={cellStates[8]} onClick={() => handleCellClick(8)} />
-            <Cell active={cellStates[9]} onClick={() => handleCellClick(9)} />
-            <Cell active={cellStates[10]} onClick={() => handleCellClick(10)} />
-            <Cell active={cellStates[11]} onClick={() => handleCellClick(11)} />
-          </tr>
-          <tr>
-            <Cell active={cellStates[12]} onClick={() => handleCellClick(12)} />
-            <Cell active={cellStates[13]} onClick={() => handleCellClick(13)} />
-            <Cell active={cellStates[14]} onClick={() => handleCellClick(14)} />
-            <Cell active={cellStates[15]} onClick={() => handleCellClick(15)} />
-          </tr>
-        </tbody>
-      </table>
-      <div>
-        Potential combination:{" "}
-        {isPotentialThreeLineCombo(cellStates).toString()}
-      </div>
-      {getPotentialCombos(cellStates).map((combo) => (
-        <WinningComboGrid combo={combo} />
-      ))}
+      <Book>
+        <NextReset />
+        <ActiveCount count={getActiveCount()} />
+        <Board>{cells}</Board>
+        <RemainingSeals activeCombo={sealStates} />
+        <SecondChancePointsPanel
+          onReset={handleResetClick}
+          onReshuffle={reshuffle}
+        />
+        <Help>
+          <>
+            <HelpP>
+              Welcome to the FFXIV Wondrous Tails helper! Activate seals on the
+              top right to get started.
+            </HelpP>
+            <HelpP>
+              Line chance calculation coming soon. Feedback and suggestions
+              welcome over on the{" "}
+              <HelpA
+                href="https://github.com/xurion/ffxiv-wondrous-tails/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  TrackEvent({
+                    eventName: "issue_tracker",
+                  })
+                }
+              >
+                issue tracker
+              </HelpA>
+              .
+            </HelpP>
+          </>
+        </Help>
+        {reshuffling ? (
+          <LoadingIcon />
+        ) : (
+          <ThreeLineCombos
+            combos={getPotentialCombos(sealStates)}
+            activeCombo={sealStates}
+          />
+        )}
+      </Book>
+      <Footer />
     </>
   );
 }
