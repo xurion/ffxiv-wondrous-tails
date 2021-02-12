@@ -4,7 +4,7 @@ import getAllCombinations, { Combination } from "./combinations";
 import ThreeLineCombos from "./ThreeLineCombos";
 import Book from "./Book";
 import Board from "./Board";
-import Cell from "./Cell";
+import Seal from "./Seal";
 import Footer from "./Footer";
 import ActiveCount from "./ActiveCount";
 import SecondChancePointsPanel from "./SecondChancePointsPanel";
@@ -17,30 +17,30 @@ import NextReset from "./NextReset";
 
 function App() {
   const loadedData = load(new Array(16).fill(false) as Combination);
-  const [cellStates, setCellStates] = useState(loadedData);
+  const [sealStates, setSealStates] = useState(loadedData);
   const [reshuffling, setReshuffling] = useState(false);
 
-  const setAndPersistCellStates = (combo: Combination) => {
-    setCellStates(combo);
+  const setAndPersistSealStates = (combo: Combination) => {
+    setSealStates(combo);
     save(combo);
   };
 
   const handleCellClick = (cell: number) => {
-    if (getActiveCount() === 9 && cellStates[cell] === false) {
+    if (getActiveCount() === 9 && sealStates[cell] === false) {
       return;
     }
 
-    const newCellsState: Combination = [...cellStates];
-    newCellsState[cell] = !cellStates[cell];
+    const newSealState: Combination = [...sealStates];
+    newSealState[cell] = !sealStates[cell];
     TrackEvent({
-      eventName: newCellsState[cell] ? "activate_seal" : "deactivate_seal",
+      eventName: newSealState[cell] ? "activate_seal" : "deactivate_seal",
       value: cell + 1,
     });
-    setAndPersistCellStates(newCellsState);
+    setAndPersistSealStates(newSealState);
   };
 
   const getActiveCount = () =>
-    cellStates.reduce((prev, curr) => (curr ? prev + 1 : prev), 0);
+    sealStates.reduce((prev, curr) => (curr ? prev + 1 : prev), 0);
 
   const compareCombos = (w: Combination, c: Combination): boolean => {
     let potentialCombo = true;
@@ -71,7 +71,7 @@ function App() {
   };
 
   const reset = () => {
-    setAndPersistCellStates(new Array(16).fill(false) as Combination);
+    setAndPersistSealStates(new Array(16).fill(false) as Combination);
   };
 
   const handleResetClick = () => {
@@ -108,7 +108,7 @@ function App() {
         ...activePart,
         ...inactivePart,
       ] as Combination);
-      setAndPersistCellStates(combo);
+      setAndPersistSealStates(combo);
       setReshuffling(false);
     }, 1000);
   };
@@ -116,8 +116,8 @@ function App() {
   const cells = [];
   for (let i = 0; i < 16; i++) {
     cells.push(
-      <Cell
-        visible={cellStates[i]}
+      <Seal
+        visible={sealStates[i]}
         onClick={() => handleCellClick(i)}
         img={i + 1}
         key={i.toString()}
@@ -131,7 +131,7 @@ function App() {
         <NextReset />
         <ActiveCount count={getActiveCount()} />
         <Board>{cells}</Board>
-        <RemainingSeals activeCombo={cellStates} />
+        <RemainingSeals activeCombo={sealStates} />
         <SecondChancePointsPanel
           onReset={handleResetClick}
           onReshuffle={reshuffle}
@@ -165,8 +165,8 @@ function App() {
           <LoadingIcon />
         ) : (
           <ThreeLineCombos
-            combos={getPotentialCombos(cellStates)}
-            activeCombo={cellStates}
+            combos={getPotentialCombos(sealStates)}
+            activeCombo={sealStates}
           />
         )}
       </Book>
