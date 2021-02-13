@@ -17,6 +17,13 @@ import Help, { HelpA, HelpP } from "./Help";
 import RemainingSeals from "./RemainingSeals";
 import NextReset from "./NextReset";
 
+const Wrapper = styled.div`
+  background: url(${process.env.PUBLIC_URL}/images/idyllshire.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 20px 0;
+`;
+
 function App() {
   const loadedData = load(new Array(16).fill(false) as Combination);
   const [sealStates, setSealStates] = useState(loadedData);
@@ -126,13 +133,6 @@ function App() {
       />
     );
   }
-
-  const Wrapper = styled.div`
-    background: url(${process.env.PUBLIC_URL}/images/idyllshire.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 20px 0;
-  `;
 
   return (
     <Wrapper>

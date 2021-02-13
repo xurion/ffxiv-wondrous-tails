@@ -35,14 +35,3 @@ const Seal = (props: SealProps) => {
 };
 
 export default Seal;
-
-/*
-<SealContainer {...props}>
-  <img
-    src={`${process.env.PUBLIC_URL}/images/${img}.png`}
-    alt=""
-    width={size}
-    height={size}
-  />
-</SealContainer>
-*/
