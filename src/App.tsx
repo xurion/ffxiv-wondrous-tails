@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import styled from "styled-components";
+import "./styles.css";
 import getAllCombinations, { Combination } from "./combinations";
 import ThreeLineCombos from "./ThreeLineCombos";
 import Book from "./Book";
@@ -14,6 +16,13 @@ import { TrackEvent } from "./analytics";
 import Help, { HelpA, HelpP } from "./Help";
 import RemainingSeals from "./RemainingSeals";
 import NextReset from "./NextReset";
+
+const Wrapper = styled.div`
+  background: url(${process.env.PUBLIC_URL}/images/idyllshire.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 20px 0;
+`;
 
 function App() {
   const loadedData = load(new Array(16).fill(false) as Combination);
@@ -126,7 +135,7 @@ function App() {
   }
 
   return (
-    <>
+    <Wrapper>
       <Book>
         <NextReset />
         <ActiveCount count={getActiveCount()} />
@@ -171,7 +180,7 @@ function App() {
         )}
       </Book>
       <Footer />
-    </>
+    </Wrapper>
   );
 }
 

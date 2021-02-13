@@ -3,28 +3,33 @@ import styled from "styled-components";
 
 const StyledP = styled.p`
   font-size: 12px;
+  margin-bottom: 0;
   text-align: center;
+`;
+
+const Link = styled.a`
+  color: #0056b3;
 `;
 
 const Footer = () => {
   return (
     <StyledP>
       Created by{" "}
-      <a
+      <Link
         href="https://eu.finalfantasyxiv.com/lodestone/character/2387352"
         target="_blank"
         rel="noopener noreferrer"
       >
         Xurion Uroxin
-      </a>{" "}
+      </Link>{" "}
       of Cerberus |{" "}
-      <a
+      <Link
         href="https://github.com/xurion"
         target="_blank"
         rel="noopener noreferrer"
       >
         Github
-      </a>
+      </Link>
       <br />
       This website is not affiliated with Square Enix.
       <br />
