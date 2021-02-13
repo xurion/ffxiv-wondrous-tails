@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import styled from "styled-components";
+import "./styles.css";
 import getAllCombinations, { Combination } from "./combinations";
 import ThreeLineCombos from "./ThreeLineCombos";
 import Book from "./Book";
@@ -125,8 +127,15 @@ function App() {
     );
   }
 
+  const Wrapper = styled.div`
+    background: url(${process.env.PUBLIC_URL}/images/idyllshire.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px 0;
+  `;
+
   return (
-    <>
+    <Wrapper>
       <Book>
         <NextReset />
         <ActiveCount count={getActiveCount()} />
@@ -171,7 +180,7 @@ function App() {
         )}
       </Book>
       <Footer />
-    </>
+    </Wrapper>
   );
 }
 
