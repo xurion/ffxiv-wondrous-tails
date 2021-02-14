@@ -18,9 +18,11 @@ import RemainingSeals from "./RemainingSeals";
 import NextReset from "./NextReset";
 
 const Wrapper = styled.div`
-  background: url(${process.env.PUBLIC_URL}/images/idyllshire.png);
+  background-image: url(${process.env.PUBLIC_URL}/images/idyllshire.png);
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 100%;
   padding: 20px 0;
 `;
 
