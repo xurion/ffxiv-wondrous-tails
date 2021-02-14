@@ -10,3 +10,6 @@ This project is a work in progress. Future plans include:
 
 - Predictions percentages for 1, 2 and 3 lines
 - Randomised duty tiles
+
+This repository is not affiliated with Square Enix.
+© 2010 - 2021 SQUARE ENIX CO., LTD. All Rights Reserved.
