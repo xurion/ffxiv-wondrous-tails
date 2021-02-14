@@ -8,9 +8,10 @@ Automatically built and deployed: https://xurion.github.io/ffxiv-wondrous-tails
 
 This project is a work in progress. Future plans include:
 
-- Google Analytics
 - Predictions percentages for 1, 2 and 3 lines
 - Randomised duty tiles
-- Remove icons from right side as they're assigned to match game
-- Tooltips for various parts
-- Introduction joyride
+
+```
+This repository is not affiliated with Square Enix.
+© 2010 - 2021 SQUARE ENIX CO., LTD. All Rights Reserved.
+```
