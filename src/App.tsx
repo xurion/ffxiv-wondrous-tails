@@ -18,9 +18,11 @@ import RemainingSeals from "./RemainingSeals";
 import NextReset from "./NextReset";
 
 const Wrapper = styled.div`
-  background: url(${process.env.PUBLIC_URL}/images/idyllshire.png);
+  background-image: url(${process.env.PUBLIC_URL}/images/idyllshire.png);
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 100%;
   padding: 20px 0;
 `;
 
@@ -34,16 +36,16 @@ function App() {
     save(combo);
   };
 
-  const handleCellClick = (cell: number) => {
-    if (getActiveCount() === 9 && sealStates[cell] === false) {
+  const handleSealClick = (seal: number) => {
+    if (getActiveCount() === 9 && sealStates[seal] === false) {
       return;
     }
 
     const newSealState: Combination = [...sealStates];
-    newSealState[cell] = !sealStates[cell];
+    newSealState[seal] = !sealStates[seal];
     TrackEvent({
-      eventName: newSealState[cell] ? "activate_seal" : "deactivate_seal",
-      value: cell + 1,
+      eventName: newSealState[seal] ? "activate_seal" : "deactivate_seal",
+      value: seal + 1,
     });
     setAndPersistSealStates(newSealState);
   };
@@ -122,12 +124,12 @@ function App() {
     }, 1000);
   };
 
-  const cells = [];
+  const seals: JSX.Element[] = [];
   for (let i = 0; i < 16; i++) {
-    cells.push(
+    seals.push(
       <Seal
         visible={sealStates[i]}
-        onClick={() => handleCellClick(i)}
+        onClick={() => handleSealClick(i)}
         img={i + 1}
         key={i.toString()}
       />
@@ -139,7 +141,7 @@ function App() {
       <Book>
         <NextReset />
         <ActiveCount count={getActiveCount()} />
-        <Board>{cells}</Board>
+        <Board>{seals}</Board>
         <RemainingSeals activeCombo={sealStates} />
         <SecondChancePointsPanel
           onReset={handleResetClick}
