@@ -54,12 +54,8 @@ const ComboGrid = (props: ComboGridProps) => {
   const cells = [];
   for (let i = 0; i < 16; i++) {
     cells.push(
-      <CellWrapper>
-        <Cell
-          active={activeCombo[i]}
-          required={fullCombo[i]}
-          key={i.toString()}
-        />
+      <CellWrapper key={i.toString()}>
+        <Cell active={activeCombo[i]} required={fullCombo[i]} />
       </CellWrapper>
     );
   }
