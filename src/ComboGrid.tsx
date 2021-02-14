@@ -5,11 +5,16 @@ import { Combination } from "./combinations";
 const Grid = styled.div`
   background: #e3d69c;
   border: 1px solid #969074;
-  display: inline-block;
+  display: inline-flex;
+  flex-wrap: wrap;
   font-size: 0;
   margin: 0 12px 12px 0;
   padding: 3px;
   width: 72px;
+`;
+
+const CellWrapper = styled.div`
+  width: 25%;
 `;
 
 type CellProps = {
@@ -49,11 +54,13 @@ const ComboGrid = (props: ComboGridProps) => {
   const cells = [];
   for (let i = 0; i < 16; i++) {
     cells.push(
-      <Cell
-        active={activeCombo[i]}
-        required={fullCombo[i]}
-        key={i.toString()}
-      />
+      <CellWrapper>
+        <Cell
+          active={activeCombo[i]}
+          required={fullCombo[i]}
+          key={i.toString()}
+        />
+      </CellWrapper>
     );
   }
   return <Grid>{cells}</Grid>;
