@@ -26,6 +26,34 @@ const Wrapper = styled.div`
   padding: 20px 0;
 `;
 
+const compareCombos = (w: Combination, c: Combination): boolean => {
+  let potentialCombo = true;
+  const allFalse = c.indexOf(true) === -1;
+  if (allFalse) {
+    return true;
+  }
+
+  for (let i = 0; i < 16; i++) {
+    if (c[i] === true && w[i] === false) {
+      potentialCombo = false;
+      break;
+    }
+  }
+
+  return potentialCombo;
+};
+
+const shuffleCombination = (combo: Combination) => {
+  const shuffledCombo: Combination = [...combo];
+  for (let i = shuffledCombo.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = shuffledCombo[i];
+    shuffledCombo[i] = shuffledCombo[j];
+    shuffledCombo[j] = temp;
+  }
+  return shuffledCombo;
+};
+
 function App() {
   const loadedData = load(new Array(16).fill(false) as Combination);
   const [sealStates, setSealStates] = useState(loadedData);
@@ -53,23 +81,6 @@ function App() {
   const getActiveCount = () =>
     sealStates.reduce((prev, curr) => (curr ? prev + 1 : prev), 0);
 
-  const compareCombos = (w: Combination, c: Combination): boolean => {
-    let potentialCombo = true;
-    const allFalse = c.indexOf(true) === -1;
-    if (allFalse) {
-      return true;
-    }
-
-    for (let i = 0; i < 16; i++) {
-      if (c[i] === true && w[i] === false) {
-        potentialCombo = false;
-        break;
-      }
-    }
-
-    return potentialCombo;
-  };
-
   const getPotentialCombos = (combination: Combination): Combination[] => {
     const potentialCombos: Combination[] = [];
     const winningCombos = getAllCombinations();
@@ -91,17 +102,6 @@ function App() {
       value: getActiveCount(),
     });
     reset();
-  };
-
-  const shuffleCombination = (combo: Combination) => {
-    const shuffledCombo: Combination = [...combo];
-    for (let i = shuffledCombo.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      let temp = shuffledCombo[i];
-      shuffledCombo[i] = shuffledCombo[j];
-      shuffledCombo[j] = temp;
-    }
-    return shuffledCombo;
   };
 
   const reshuffle = () => {
