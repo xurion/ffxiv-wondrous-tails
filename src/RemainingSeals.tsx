@@ -20,7 +20,12 @@ const order = [1, 9, 2, 10, 3, 11, 4, 12, 5, 13, 6, 14, 7, 15, 8, 16];
 const RemainingSeals = ({ activeCombo }: RemainingSealsProps) => (
   <Wrapper>
     {order.map((index) => (
-      <Seal img={index} visible={!activeCombo[index - 1]} size={50} />
+      <Seal
+        key={index.toString()}
+        img={index}
+        visible={!activeCombo[index - 1]}
+        size={50}
+      />
     ))}
   </Wrapper>
 );
