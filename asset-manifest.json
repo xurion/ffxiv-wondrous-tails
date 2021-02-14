@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/ffxiv-wondrous-tails/static/css/main.724ae871.chunk.css",
-    "main.js": "/ffxiv-wondrous-tails/static/js/main.7cee258f.chunk.js",
-    "main.js.map": "/ffxiv-wondrous-tails/static/js/main.7cee258f.chunk.js.map",
+    "main.css": "/ffxiv-wondrous-tails/static/css/main.eb47d162.chunk.css",
+    "main.js": "/ffxiv-wondrous-tails/static/js/main.b770bae3.chunk.js",
+    "main.js.map": "/ffxiv-wondrous-tails/static/js/main.b770bae3.chunk.js.map",
     "runtime-main.js": "/ffxiv-wondrous-tails/static/js/runtime-main.f64b9ec2.js",
     "runtime-main.js.map": "/ffxiv-wondrous-tails/static/js/runtime-main.f64b9ec2.js.map",
     "static/css/2.109aacae.chunk.css": "/ffxiv-wondrous-tails/static/css/2.109aacae.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.7c64f390.chunk.js.map": "/ffxiv-wondrous-tails/static/js/3.7c64f390.chunk.js.map",
     "index.html": "/ffxiv-wondrous-tails/index.html",
     "static/css/2.109aacae.chunk.css.map": "/ffxiv-wondrous-tails/static/css/2.109aacae.chunk.css.map",
-    "static/css/main.724ae871.chunk.css.map": "/ffxiv-wondrous-tails/static/css/main.724ae871.chunk.css.map",
+    "static/css/main.eb47d162.chunk.css.map": "/ffxiv-wondrous-tails/static/css/main.eb47d162.chunk.css.map",
     "static/js/2.240c42e5.chunk.js.LICENSE.txt": "/ffxiv-wondrous-tails/static/js/2.240c42e5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.f64b9ec2.js",
     "static/css/2.109aacae.chunk.css",
     "static/js/2.240c42e5.chunk.js",
-    "static/css/main.724ae871.chunk.css",
-    "static/js/main.7cee258f.chunk.js"
+    "static/css/main.eb47d162.chunk.css",
+    "static/js/main.b770bae3.chunk.js"
   ]
 }
