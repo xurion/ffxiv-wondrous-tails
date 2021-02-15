@@ -2,6 +2,7 @@ html {
   min-height: 100%;
   position: relative;
   min-width: 1200px;
+  z-index: -1;
 }
 body {
   min-width: 1200px;
