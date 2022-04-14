@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/ffxiv-wondrous-tails/static/css/main.e0dbbafd.chunk.css",
-    "main.js": "/ffxiv-wondrous-tails/static/js/main.e170d9d2.chunk.js",
-    "main.js.map": "/ffxiv-wondrous-tails/static/js/main.e170d9d2.chunk.js.map",
-    "runtime-main.js": "/ffxiv-wondrous-tails/static/js/runtime-main.f64b9ec2.js",
-    "runtime-main.js.map": "/ffxiv-wondrous-tails/static/js/runtime-main.f64b9ec2.js.map",
+    "main.js": "/ffxiv-wondrous-tails/static/js/main.928d3cfc.chunk.js",
+    "main.js.map": "/ffxiv-wondrous-tails/static/js/main.928d3cfc.chunk.js.map",
+    "runtime-main.js": "/ffxiv-wondrous-tails/static/js/runtime-main.08db043e.js",
+    "runtime-main.js.map": "/ffxiv-wondrous-tails/static/js/runtime-main.08db043e.js.map",
     "static/css/2.109aacae.chunk.css": "/ffxiv-wondrous-tails/static/css/2.109aacae.chunk.css",
-    "static/js/2.240c42e5.chunk.js": "/ffxiv-wondrous-tails/static/js/2.240c42e5.chunk.js",
-    "static/js/2.240c42e5.chunk.js.map": "/ffxiv-wondrous-tails/static/js/2.240c42e5.chunk.js.map",
-    "static/js/3.7c64f390.chunk.js": "/ffxiv-wondrous-tails/static/js/3.7c64f390.chunk.js",
-    "static/js/3.7c64f390.chunk.js.map": "/ffxiv-wondrous-tails/static/js/3.7c64f390.chunk.js.map",
+    "static/js/2.b8a785f4.chunk.js": "/ffxiv-wondrous-tails/static/js/2.b8a785f4.chunk.js",
+    "static/js/2.b8a785f4.chunk.js.map": "/ffxiv-wondrous-tails/static/js/2.b8a785f4.chunk.js.map",
+    "static/js/3.5b4449ba.chunk.js": "/ffxiv-wondrous-tails/static/js/3.5b4449ba.chunk.js",
+    "static/js/3.5b4449ba.chunk.js.map": "/ffxiv-wondrous-tails/static/js/3.5b4449ba.chunk.js.map",
     "index.html": "/ffxiv-wondrous-tails/index.html",
     "static/css/2.109aacae.chunk.css.map": "/ffxiv-wondrous-tails/static/css/2.109aacae.chunk.css.map",
     "static/css/main.e0dbbafd.chunk.css.map": "/ffxiv-wondrous-tails/static/css/main.e0dbbafd.chunk.css.map",
-    "static/js/2.240c42e5.chunk.js.LICENSE.txt": "/ffxiv-wondrous-tails/static/js/2.240c42e5.chunk.js.LICENSE.txt"
+    "static/js/2.b8a785f4.chunk.js.LICENSE.txt": "/ffxiv-wondrous-tails/static/js/2.b8a785f4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.f64b9ec2.js",
+    "static/js/runtime-main.08db043e.js",
     "static/css/2.109aacae.chunk.css",
-    "static/js/2.240c42e5.chunk.js",
+    "static/js/2.b8a785f4.chunk.js",
     "static/css/main.e0dbbafd.chunk.css",
-    "static/js/main.e170d9d2.chunk.js"
+    "static/js/main.928d3cfc.chunk.js"
   ]
 }
