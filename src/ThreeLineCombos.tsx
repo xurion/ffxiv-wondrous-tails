@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { Combination } from "./combinations";
 import ComboGrid from "./ComboGrid";
