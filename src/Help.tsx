@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const HelpWrapper = styled.div`
@@ -10,7 +9,8 @@ const HelpWrapper = styled.div`
   width: 400px;
 `;
 
-export const HelpP = styled.p`
+export const HelpP = styled.p<{ bold?: boolean }>`
+  font-weight: ${({ bold }) => (bold ? "bold" : "normal")};
   margin-bottom: 10px;
 `;
 
@@ -21,6 +21,12 @@ export const HelpA = styled.a`
   &:hover {
     color: #fff;
   }
+`;
+
+export const HelpUl = styled.ul``;
+
+export const HelpLi = styled.li<{ faded?: boolean }>`
+  opacity: ${({ faded }) => (faded ? "0.5" : "1")};
 `;
 
 type HelpProps = {

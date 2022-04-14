@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
 import "./styles.css";
@@ -13,9 +13,10 @@ import SecondChancePointsPanel from "./SecondChancePointsPanel";
 import LoadingIcon from "./LoadingIcon";
 import { load, save } from "./storage";
 import { TrackEvent } from "./analytics";
-import Help, { HelpA, HelpP } from "./Help";
+import Help, { HelpA, HelpLi, HelpP, HelpUl } from "./Help";
 import RemainingSeals from "./RemainingSeals";
 import NextReset from "./NextReset";
+import calculateProbabilities from "./probabilities";
 
 const Wrapper = styled.div`
   background-image: url(${process.env.PUBLIC_URL}/images/idyllshire.png);
@@ -136,42 +137,86 @@ function App() {
     );
   }
 
+  const activeCount = getActiveCount();
+  const probabilities = calculateProbabilities(sealStates);
+  const noLinesChance = 100 - probabilities.lines1;
+  const noLinesChanceFormatted = `${
+    noLinesChance % 1 === 0 ? noLinesChance : noLinesChance.toFixed(1)
+  }%`;
+  const oneLineChance = probabilities.lines1;
+  const oneLineChanceFormatted = `${
+    oneLineChance % 1 === 0 ? oneLineChance : oneLineChance.toFixed(1)
+  }%`;
+  const twoLinesChance = probabilities.lines2;
+  const twoLinesChanceFormatted = `${
+    twoLinesChance % 1 === 0 ? twoLinesChance : twoLinesChance.toFixed(1)
+  }%`;
+  const threeLinesChance = probabilities.lines3;
+  const threeLinesChanceFormatted = `${
+    threeLinesChance % 1 === 0 ? threeLinesChance : threeLinesChance.toFixed(1)
+  }%`;
+
   return (
     <Wrapper>
       <Book>
         <NextReset />
-        <ActiveCount count={getActiveCount()} />
+        <ActiveCount count={activeCount} />
         <Board>{seals}</Board>
         <RemainingSeals activeCombo={sealStates} />
         <SecondChancePointsPanel
           onReset={handleResetClick}
           onReshuffle={reshuffle}
         />
-        <Help>
-          <>
-            <HelpP>
-              Welcome to the FFXIV Wondrous Tails helper! Activate seals on the
-              top right to get started.
-            </HelpP>
-            <HelpP>
-              Line chance calculation coming soon. Feedback and suggestions
-              welcome over on the{" "}
-              <HelpA
-                href="https://github.com/xurion/ffxiv-wondrous-tails/issues"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  TrackEvent({
-                    eventName: "issue_tracker",
-                  })
-                }
-              >
-                issue tracker
-              </HelpA>
-              .
-            </HelpP>
-          </>
-        </Help>
+        {!reshuffling && (
+          <Help>
+            {activeCount === 0 ? (
+              <>
+                <HelpP>
+                  Welcome to the FFXIV Wondrous Tails helper! Activate seals on
+                  the top right to get started.
+                </HelpP>
+                <HelpP>
+                  Reset or reshuffle the board with the buttons above.
+                </HelpP>
+                <HelpP>
+                  Line chance calculations will appear here. Feedback and
+                  suggestions welcome over on the{" "}
+                  <HelpA
+                    href="https://github.com/xurion/ffxiv-wondrous-tails/issues"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      TrackEvent({
+                        eventName: "issue_tracker",
+                      })
+                    }
+                  >
+                    issue tracker
+                  </HelpA>
+                  .
+                </HelpP>
+              </>
+            ) : (
+              <>
+                <HelpP bold>Probabilities</HelpP>
+                <HelpUl>
+                  <HelpLi faded={noLinesChance === 0}>
+                    No lines: {noLinesChanceFormatted}
+                  </HelpLi>
+                  <HelpLi faded={oneLineChance === 0}>
+                    One line: {oneLineChanceFormatted}
+                  </HelpLi>
+                  <HelpLi faded={twoLinesChance === 0}>
+                    Two lines: {twoLinesChanceFormatted}
+                  </HelpLi>
+                  <HelpLi faded={threeLinesChance === 0}>
+                    Three lines: {threeLinesChanceFormatted}
+                  </HelpLi>
+                </HelpUl>
+              </>
+            )}
+          </Help>
+        )}
         {reshuffling ? (
           <LoadingIcon />
         ) : (
